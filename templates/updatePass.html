@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block side %}
+    <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="/index" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li >
+                    <a href="/index">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="true">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="charts" role="navigation" aria-expanded="true" >
+                        <ul class="nav">
+                            <li ><a href="/updatepwd/1">修改管理员</a></li>
+                            <li><a href="/adumanage/1">增加管理员</a></li>
+                            <li><a href="/loginrecs/1">登录记录</a></li>
+                            <li><a href="/adgmanage/1">权限组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="false">
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="ui-elements" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/search">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="false">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forms" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/uploadData">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="false">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="tables" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/adulog">管理员记录</a></li>
+                            <li><a href="/batchdelete">批量删除</a></li>
+                            <li><a href="/downloadinfo">下载信息</a></li>
+                            <li><a href="/uploadrecord">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+{% endblock side %}
+{% block body %}
+    {% csrf_token %}
+    <div class="content">
+            <div class="container-fluid">
+                <div id="updatePass" class="row wrapper wrapper-content">
+                    <div class="row addpwtitle">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="updatepw_icon"></em>
+                                        修改管理员
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="content-box form-ajax form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                用户名：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="username" id="username" class="form-control" maxlength="20" placeholder="请输入账号">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                密&nbsp;&nbsp;&nbsp;码：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="newpwd" id="newpwd" class="form-control" maxlength="20" placeholder="后台登录密码，留空为不修改!">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                管理组：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <select id="BankCode" name="BankCode" class="form-control">
+                                                    {% for obj in group_data %}
+                                                        <option value="{{ obj.id }}">{{ obj.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-4">
+                                                <button type="submit" class="btn subBtnstl" id="btnUpdateLoginPWD">提交修改内容</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row warnlip">未查找到相应结果！</div>
+                    <div class="row tablelist">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="list_icon"></em>
+                                        管理员管理
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <form class="form-search">
+                                        <div class="am-col col-lg-4" style="float: right">
+                                            <div class="am-input-group">
+
+                                                <span class="am-input-group-btn" id="search-btn">
+                                                    <button class="am-btn am-btn-default" type="button">搜 索</button>
+                                                    <i class="search-icon"></i>
+                                                </span>
+                                                <input type="text" class="am-form-field" id="search">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>用户名</th>
+                                                    <th>最后登录</th>
+                                                    <th>最后IP</th>
+                                                    <th>管理组</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {% for user_obj in user_data %}
+                                                    <tr>
+                                                    <td>{{user_obj.id}}</td>
+                                                    <td>{{user_obj.name}}</td>
+                                                    <td>{{user_obj.last_time}}</td>
+                                                    <td>{{user_obj.last_ip}}</td>
+                                                    <td>{{ user_obj.group }}</td>
+                                                    <td><img class="edit-list" user_name="{{user_obj.name}}" group="{{ user_obj.group_id }}" src="{% static 'assets/img/edit.jpg' %}" alt=""><img class="delete-list" username='{{user_obj.name}}' src="{% static 'assets/img/delete-icon.jpg' %}" alt=""></td>
+                                                    </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="span12" id="dPager">
+                                        <div class="pager">
+
+                                            {% if userobj.has_previous %}
+                                                <li><a class="prev" href="{% url 'major:updatepwd' userobj.previous_page_number %}">上一页</a></li>
+                                            {% endif %}
+                                            {% for pindex in pages %}
+                                                {% if pindex == userobj.number %}
+                                                <li><span class="current">{{ pindex }}</span></li>
+                                                {% else %}
+                                                <li><a href="{% url 'major:updatepwd' pindex %}">{{ pindex }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if userobj.has_next %}
+                                            <li><a class="next" href="{% url 'major:updatepwd' userobj.next_page_number %}">下一页</a></li>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock body %}
+{% block foot %}
+<script type="text/javascript" >
+
+        $(document).on('click','#updatePass .edit-list',function(){
+            $('#updatePass .addpwtitle #username').val($(this).attr('user_name'));
+            $('#updatePass .addpwtitle #BankCode').val($(this).attr('group'));
+        });
+
+        $('#btnUpdateLoginPWD').click(function() {
+          $.ajax({
+              url:'/updatepwd/0',
+              dataType:'json',
+              cache:false,
+              type:'POST',
+              data:{
+                username:$('#username').val(),
+                newpwd:$('#newpwd').val(),
+                group:$('#BankCode option:selected').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              success: function(obj) {
+                    if(obj.stat == 0){
+                        alert('修改成功');
+                        window.location.reload();
+                    }else if(obj.stat == 1){
+                        alert('该用户不存在，请重新输入')
+                    }else if(obj.stat == 2){
+                        alert('没有该组，请先创建组')
+                    }
+
+              }
+          })
+        });
+
+        $(document).on('click','#updatePass .delete-list',function(){
+           var msg = confirm("确定删除吗");
+           if (msg==true){
+              $.ajax({
+              url:'/delete',
+              dataType:'json',
+              cache:false,
+              type:'POST',
+              data:{
+                username:$(this).attr('username'),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              success: function(obj) {
+                    if(obj.stat == 0){
+                        alert('删除成功');
+                        window.location.reload();
+                    }else if(obj.stat == 1){
+                        alert('该用户不存在')
+                    }
+              }
+          })}
+        });
+
+        $('#search-btn').click(function() {
+          $.ajax({
+              url:'/search/admin',
+              dataType:'json',
+              cache:false,
+              type:'POST',
+              data:{
+                search_val:$('#search').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              success: function(obj) {
+                    if(obj.stat == 0){
+                        $('.table tbody tr').empty();
+                        $('.pager').empty();
+                        $('.table tbody').append('<tr><td>'+ obj.id + '</td><td>' + obj.name +'</td><td>' + obj.last_time + '</td><td>' + obj.last_ip + '</td><td>' + obj.group + '</td><td>' + '<img class="edit-list" user_name="'+obj.name+'" group="'+obj.group_id+'" src=" {% static "assets/img/edit.jpg" %} "alt="">' + '<img class="delete-list" username="'+obj.name+'"src=" {% static "assets/img/delete-icon.jpg" %} " alt="">'+'</td></tr>');
+
+                    }else if(obj.stat == 1){
+                        alert('该用户不存在!')
+                    }
+
+              }
+          })
+        })
+
+
+</script>
+{% endblock foot %}
+

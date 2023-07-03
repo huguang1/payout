@@ -1,0 +1,321 @@
+﻿{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block side %}
+    <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="/index" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li >
+                    <a href="/index">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="true">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="charts" role="navigation" aria-expanded="true" >
+                        <ul class="nav">
+                            <li ><a href="/updatepwd/1">修改管理员</a></li>
+                            <li><a href="/adumanage/1">增加管理员</a></li>
+                            <li><a href="/loginrecs/1">登录记录</a></li>
+                            <li class="active"><a href="/adgmanage/1">权限组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="false">
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="ui-elements" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/search">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="false">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forms" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/uploadData">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="false">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="tables" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/adulog">管理员记录</a></li>
+                            <li><a href="/batchdelete">批量删除</a></li>
+                            <li><a href="/downloadinfo">下载信息</a></li>
+                            <li><a href="/uploadrecord">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+{% endblock side %}
+{% block body %}
+    <!--内容区s-->
+        <div class="content">
+            <div class="container-fluid">
+                <div id="adgManage" class="row wrapper wrapper-content">
+
+
+                    <div class="row add-adgroup col-lg-4">
+                        <button class="add-adgroup-btn"></button>
+                    </div>
+                    <div class="row addgroup">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="updatepw_icon"></em>
+                                        增加管理组
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="content-box form-ajax form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                管理组名称：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="groupName" id="groupName" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group downstate">
+                                            <label class="col-md-2 control-label">
+                                                权限：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <!--<input type="checkbox" name="moduleCon" id="moduleCon" class=""  value="超级管理员" required="156156">
+                                                    <label for="moduleCon">超级管理员</label>-->
+                                                <input type="checkbox" name="adminMdl" id="adminMdl" class="" value="管理员模块" required="156156">
+                                                    <label for="adminMdl">管理员模块</label>
+                                                <input type="checkbox" name="msgSch" id="msgSch" class="" value="信息查询" required="156156">
+                                                    <label for="msgSch">信息查询</label>
+                                                <input type="checkbox" name="upLD" id="upLD" class="" value="上传数据包" required="156156">
+                                                    <label for="upLD">数据包上传</label>
+                                                <input type="checkbox" name="msgCon" id="msgCon" class="" value="信息管理" required="156156">
+                                                    <label for="msgCon">信息管理</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-4">
+                                                <button type="button" class="btn subBtnstl" id="btnUpdateLoginPWD">提 &nbsp;&nbsp;&nbsp;交</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row tablelist">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="list_icon"></em>
+                                        管理组管理
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <form class="form-search">
+                                        <div class="am-col col-lg-4" style="float: right">
+                                            <div class="am-input-group">
+
+                                                <span class="am-input-group-btn" id="search-btn">
+                                                    <button class="am-btn am-btn-default" type="button">搜 索</button>
+                                                    <i class="search-icon"></i>
+                                                </span>
+                                                <input type="text" class="am-form-field" id="search">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>管理组名称</th>
+                                                    <th>人数</th>
+                                                    <th>管理</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {% for obj in data %}
+                                                <tr>
+                                                    <td>{{obj.id}}</td>
+                                                    <td>{{obj.name}}</td>
+                                                    <td>{{obj.count}}</td>
+                                                    <td><img class="edit-list" group="{{obj.name}}" pmsions= "{{obj.pmsion}}" src="{% static 'assets/img/edit.jpg' %}" alt=""><img class="delete-list" groupname="{{obj.name}}" src="{% static 'assets/img/delete-icon.jpg' %}" alt=""></td>
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="span12" id="dPager">
+                                        <div class="pager">
+                                           {% if groupobj.has_previous %}
+                                                <li><a class="prev" href="{% url 'major:adgmanage' groupobj.previous_page_number %}">上一页</a></li>
+                                            {% endif %}
+                                            {% for pindex in pages %}
+                                                {% if pindex == userobj.number %}
+                                                <li><span class="current">{{ pindex }}</span></li>
+                                                {% else %}
+                                                <li><a href="{% url 'major:adgmanage' pindex %}">{{ pindex }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if groupobj.has_next %}
+                                            <li><a class="next" href="{% url 'major:adgmanage' groupobj.next_page_number %}">下一页</a></li>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--内容区end-->
+{% endblock body%}
+
+
+{% block foot %}
+<script type="text/javascript" >
+
+//放大镜
+    $(document).on('click','#adgManage .edit-list',function(){
+        $('input:checkbox').attr("checked",false);
+        $('#groupName').val($(this).attr('group'));
+        var newobj = eval('(' + $(this).attr('pmsions') + ')');
+        var inputarr = [];
+        $.each($('input:checkbox'),function() {
+          inputarr.push($(this).val())
+        });
+        for(var i=0;i<inputarr.length;i++){
+            for(var p=0;p<newobj.length;p++){
+                if(newobj[p]==inputarr[i]){
+                  $('input:checkbox').eq(i).attr("checked",true);
+                  break
+                }
+            }
+        }
+        });
+
+//增加组
+
+    $('#btnUpdateLoginPWD').click(function() {
+        var arr = [];
+        $.each($('input:checkbox:checked'),function(){
+            arr.push($(this).val())
+            });
+          var groupname = $('#groupName').val();
+          if (groupname==''){
+             alert('请输入组名')
+             }else{
+ 
+          $.ajax({
+              url:'/addgroup',
+              dataType:'json',
+              cache:false,
+              type:'POST',
+              data:{
+                groupname:groupname,
+                checkdata:JSON.stringify(arr),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              success: function(obj) {
+                if(obj.stat == 0){
+                    alert('添加成功');
+                    window.location.reload();
+                }else if(obj.stat == 1){
+                    alert('修改成功');
+                    window.location.reload();
+                }
+              }
+          })}
+    });
+
+//删除组
+    $(document).on('click','#adgManage .delete-list',function(){
+        var msg = confirm("确定删除吗");
+        if (msg == true){
+            $.ajax({
+              url:'/delgroup',
+              dataType:'json',
+              cache:false,
+              type:'post',
+              data:{
+                groupname:$(this).attr('groupname'),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              success: function(obj) {
+                if(obj.stat == 0){
+                    alert('删除成功');
+                    window.location.reload();
+                    }else if(obj.stat == 1){
+                    alert('该组不存在');
+                    }
+              }
+              });
+}
+        });
+
+//搜索
+$('#search-btn').click(function() {
+          $.ajax({
+              url:'/search/group',
+              dataType:'json',
+              cache:false,
+              type:'POST',
+              data:{
+                search_val:$('#search').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              success: function(obj) {
+                    if(obj.stat == 0){
+                        $('.table tbody tr').empty();
+                        $('.pager').empty();
+                        $('.table tbody').append('<tr><td>'+ obj.id +'</td><td>'+ obj.name +'</td><td>'+ obj.count +'</td><td>'+'<img class="edit-list" group="'+ obj.name +'" src="{% static "assets/img/edit.jpg" %}" alt="">'+'<img class="delete-list" groupname="'+ obj.name +'" src="{% static "assets/img/delete-icon.jpg" %}" alt="">'+'</td></tr>');
+                    }else if(obj.stat == 1){
+                        alert('该组不存在!')
+                    }
+              }
+          })
+        })
+
+
+</script>
+{% endblock foot %}

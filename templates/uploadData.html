@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block side %}
+        <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="/index" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li>
+                    <a href="/index">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="false">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="charts" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li ><a href="/updatepwd/1">修改管理员</a></li>
+                            <li><a href="/adumanage/1">增加管理员</a></li>
+                            <li><a href="/loginrecs/1">登录记录</a></li>
+                            <li><a href="/adgmanage/1">权限组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="false">
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="ui-elements" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/search">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="true">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="forms" role="navigation" aria-expanded="false">
+                        <ul class="nav">
+                            <li class="active"><a href="/uploadData">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="false">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="tables" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/adulog">管理员记录</a></li>
+                            <li><a href="/batchdelete">批量删除</a></li>
+                            <li><a href="/downloadinfo">下载信息</a></li>
+                            <li><a href="/uploadrecord">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock side %}
+{% block body %}
+    <div class="content">
+            <div class="container-fluid">
+                <div id="uploadData" class="row wrapper wrapper-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="updatepw_icon"></em>
+                                        上传信息
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <form class="content-box form-ajax form-horizontal" enctype="multipart/form-data" action="/uploadData" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                               数据包备注名：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="msg" id="msg" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                CSV数据包：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="file" class="form-control" name="myfile">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-4">
+                                                <button type="submit" class="btn subBtnstl" id="btnUpdateLoginPWD">导入数据</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 style="color:green" >{{ msg }}</h3>
+                    <div class="row warnlip">未上传成功！</div>
+
+                </div>
+            </div>
+        </div>
+{% endblock body %}

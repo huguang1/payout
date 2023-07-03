@@ -1,0 +1,168 @@
+﻿{% extends 'base.html' %}
+{% block side %}
+        <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="/index" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li>
+                    <a href="/index">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="false">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="charts" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li ><a href="/updatepwd/1">修改管理员</a></li>
+                            <li><a href="/adumanage/1">增加管理员</a></li>
+                            <li><a href="/loginrecs/1">登录记录</a></li>
+                            <li><a href="/adgmanage/1">权限组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="false">
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="ui-elements" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/search">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="false">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forms" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/uploadData">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="true">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="tables" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/adulog">管理员记录</a></li>
+                            <li><a href="/batchdelete">批量删除</a></li>
+                            <li><a href="/downloadinfo">下载信息</a></li>
+                            <li class="active"><a href="/uploadrecord">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock side %}
+{% block body %}
+    <div class="content">
+            <div class="container-fluid">
+                <div id="uploadRecord" class="row wrapper wrapper-content">
+                {% if index == 'NO' %}
+                    <div>未查找到相应结果！</div>
+                {% endif %}
+                    <div class="row tablelist">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="list_icon"></em>
+                                        上传记录
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <form class="form-search" action="./uploadrecord" method="post">
+                                        {% csrf_token %}
+                                        <div class="am-col col-lg-4" style="float: right">
+                                            <div class="am-input-group">
+                                                <span class="am-input-group-btn" id="search-btn">
+                                                    <button class="am-btn am-btn-default" type="submit">搜 索</button>
+                                                    <i class="search-icon"></i>
+                                                </span>
+                                                <input type="text" class="am-form-field" name="searchinfo">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>批次ID</th>
+                                                    <th>上传时间</th>
+                                                    <th>数据名称</th>
+                                                    <th>上传文件名</th>
+                                                    <th>导入成功数量</th>
+                                                    <th>操作者</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                            {% for record in records %}
+                                                <tr>
+                                                    <td>{{ record.id }}</td>
+                                                    <td>{{ record.create_time }}</td>
+                                                    <td>{{ record.dataname }}</td>
+                                                    <td>{{ record.filename }}</td>
+                                                    <td>{{ record.number }}</td>
+                                                    <td>{{ record.bywho }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% if paging == 'NO' %}
+                                {% else %}
+                                    <div class="span12" id="dPager">
+                                        <div class="pager">
+                                            <ul>
+                                                <li><a class="first" href="./uploadrecord?page=1">首页</a></li>
+                                                {% if records.has_previous %}
+                                                <li><a class="prev" href="./uploadrecord?page={{ records.previous_page_number }}">上一页</a></li>
+                                                {% endif %}
+                                                {% for pindex in pages %}
+                                                    <li><a href="./uploadrecord?page={{ pindex }}" {% if pindex == skus_page.number %}class="current"{% endif %}>{{ pindex }}</a></li>
+                                                {% endfor %}
+                                                {% if records.has_next %}
+                                                <li><a class="next" href="./uploadrecord?page={{ records.next_page_number }}">下一页</a></li>
+                                                {% endif %}
+                                                <li><span class="rows">共{{ count }}条记录</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock body %}
+
+
+

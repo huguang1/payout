@@ -1,0 +1,210 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">-->
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理平台</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
+    <meta name="viewport" content="width=device-width">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/datetimepicker.min.css" rel="stylesheet">
+    <link href="./assets/css/amaze.css" rel="stylesheet">
+    <link href="./assets/css/index.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+
+    <!--侧边菜单s-->
+    <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="./index.html" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li >
+                    <a href="./index.html">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="false">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="charts" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="./updatePass.html">修 改 密 码</a></li>
+                            <li><a href="./aduManage.html">管理员管理</a></li>
+                            <li><a href="./aduRecord.html">管理员登录记录</a></li>
+                            <li><a href="./adgManage.html">管理组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="false" >
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="ui-elements" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="./msgSearch.html">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="false">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forms" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="./uploadData.html">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="true">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="tables" role="navigation" aria-expanded="false" >
+                        <ul class="nav">
+                            <li><a href="./adulog.html">管理员记录</a></li>
+                            <li><a href="./msgList.html">信息列表</a></li>
+                            <li class="active"><a href="batchDelete.html">批量删除</a></li>
+                            <li><a href="./downloadInfo.html">下载信息</a></li>
+                            <li><a href="./uploadRecord.html">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    <!--侧边菜单end-->
+
+    <div class="main-panel">
+        <!--顶部导航s-->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-minimize">
+                    <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                        <i class="ti-arrow-left"></i>
+                    </button>
+                </div>
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand hidden-lg hidden-md" href="#"> 管理平台 </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#pablo" class="dropdown-toggle" >
+                                <i class="ti-settings" title="设置"></i>
+                                <p class="hidden-lg hidden-md" >设  置</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./login.html" class="dropdown-toggle" >
+                                <i class="ti-user" title="退出"></i>
+                                <p class="" >安全退出</p>
+                            </a>
+                        </li>
+
+                        <li class="separator hidden-lg hidden-md"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--顶部导航end-->
+
+        <!--内容区s-->
+        <div class="content">
+            <div class="container-fluid">
+                <div id="batchDelete" class="row wrapper wrapper-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="updatepw_icon"></em>
+                                       批量删除信息
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="content-box form-ajax form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                信息开始时间：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="startTime" id="startTime" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                信息结束时间：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="endTime" id="endTime" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                               信息批次：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="number" name="msg" id="msg" class="form-control" maxlength="20" required="" placeholder="纯数字，如需删除该时间段内全部数据则不填或者输入0">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-4">
+                                                <button type="submit" class="btn subBtnstl" id="btnUpdateLoginPWD">删除该时间段数据</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row warnlip">未删除成功！</div>
+                </div>
+            </div>
+        </div>
+        <!--内容区end-->
+    </div>
+</div>
+
+
+<!--   Core JS Files   -->
+<script src="./assets/vendors/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/datetimepicker.min.js" type="text/javascript"></script>
+<script src="./assets/js/amaze.js"></script>
+<script src="./assets/js/index.js"></script>
+
+</body>
+</html>
+

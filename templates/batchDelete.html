@@ -1,0 +1,140 @@
+﻿{% extends 'base.html' %}
+{% block side %}
+        <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="/index" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li>
+                    <a href="/index">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="false">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="charts" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li ><a href="/updatepwd/1">修改管理员</a></li>
+                            <li><a href="/adumanage/1">增加管理员</a></li>
+                            <li><a href="/loginrecs/1">登录记录</a></li>
+                            <li><a href="/adgmanage/1">权限组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="false">
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="ui-elements" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/search">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="false">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forms" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/uploadData">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="true">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="tables" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/adulog">管理员记录</a></li>
+                            <li class="active"><a href="/batchdelete">批量删除</a></li>
+                            <li><a href="/downloadinfo">下载信息</a></li>
+                            <li><a href="/uploadrecord">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock side %}
+{% block body %}
+    <div class="content">
+            <div class="container-fluid">
+                <div id="batchDelete" class="row wrapper wrapper-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="updatepw_icon"></em>
+                                       批量删除信息
+                                    </div>
+                                </div>
+                                <form action="./batchdelete" method="post">
+                                {% csrf_token %}
+                                <div class="panel-body">
+                                    <div class="content-box form-ajax form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                信息开始时间：
+                                            </label>
+                                            <div class="col-md-9 c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+                                                <input type="text" name="startTime" id="startTime" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                信息结束时间：
+                                            </label>
+                                            <div class="col-md-9 c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+                                                <input type="text" name="endTime" id="endTime" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-4">
+                                                <button type="submit" class="btn subBtnstl" id="btnUpdateLoginPWD">删除该时间段数据</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% if index == 'ERR' %}
+                    <div>未删除成功！</div>
+                    {% endif %}
+                    {% if index == 'OK' %}
+                    <div>删除成功！</div>
+                    {% endif %}
+                    {% if index == 'NO' %}
+                    <div>没有数据</div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+{% endblock body %}
+
+

@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% block side %}
+        <div class="sidebar" data-background-color="" data-active-color="danger">
+        <div class="logo">
+            <a href="/index" class="simple-text">
+                管 理 平 台
+            </a>
+        </div>
+        <div class="logo logo-mini"><a href="#" class="simple-text">C</a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav first-nav">
+                <li>
+                    <a href="/index">
+                        <i class="ti-panel"></i>
+                        <p>我的首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="false">
+                        <i class="ti-bar-chart-alt"></i>
+                        <p>管理员管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="charts" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li ><a href="/updatepwd/1">修改管理员</a></li>
+                            <li><a href="/adumanage/1">增加管理员</a></li>
+                            <li><a href="/loginrecs/1">登录记录</a></li>
+                            <li><a href="/adgmanage/1">权限组管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#ui-elements" class="collapsed" aria-expanded="true">
+                        <i class="ti-package"></i>
+                        <p>信息查询
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse in" id="ui-elements" role="navigation" aria-expanded="false">
+                        <ul class="nav">
+                            <li class="active"><a href="/search">查询信息</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#forms" class="collapsed" aria-expanded="false">
+                        <i class="ti-clipboard"></i>
+                        <p>上传数据包
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forms" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/uploadData">上传数据</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="false">
+                        <i class="ti-view-list-alt"></i>
+                        <p>信息管理
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="tables" role="navigation" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav">
+                            <li><a href="/adulog">管理员记录</a></li>
+                            <li><a href="/batchdelete">批量删除</a></li>
+                            <li><a href="/downloadinfo">下载信息</a></li>
+                            <li><a href="/uploadrecord">上传记录</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock side %}
+{% block body %}
+    <div class="content">
+            <div class="container-fluid">
+                <div id="msgSearch" class="row wrapper wrapper-content">
+                    <form class="row" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="updatepw_icon"></em>
+                                        查询信息
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="content-box form-ajax form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                               信息内容：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="msg" id="msg" class="form-control" maxlength="20" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">
+                                                类型：
+                                            </label>
+                                            <div class="col-md-9">
+                                                <select id="BankCode" name="BankCode" class="form-control">
+                                                    <option value="0">--请选择--</option>
+                                                    <option value="1101">姓名</option>
+                                                    <option value="1102">电话</option>
+                                                    <option value="1103">QQ</option>
+                                                    <option value="1104">Email</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-4">
+                                                <button type="submit" class="btn subBtnstl" id="btnUpdateLoginPWD"> &nbsp;查 &nbsp; &nbsp;询&nbsp;</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row warnlip">未查找到相应结果！</div>
+                    {% if recs %}
+                    <div class="row tablelist">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <em class="list_icon"></em>
+                                        信息管理
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>上传时间</th>
+                                                    <th>姓名</th>
+                                                    <th>派送彩金</th>
+                                                    <th>QQ</th>
+                                                    <th>电话号码</th>
+                                                    <th>电子邮箱</th>
+                                                    <th>是否派送</th>
+                                                    <th>派送</th>
+                                                    <th>派送时间</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            {% for rec in recs %}
+                                                <tr>
+                                                    <td>{{ rec.create_time }}</td>
+                                                    <td>{{ rec.name }}</td>
+                                                    <td>{{ rec.money }}</td>
+                                                    <td>{{ rec.qq }}</td>
+                                                    <td>{{ rec.tel }}</td>
+                                                    <td>{{ rec.email }}</td>
+                                                    {% if rec.state %}<td class="deliveried">已派送</td>{% else %}<td>未派送</td>{% endif %}
+                                                    {% if rec.operator %}<td>{{ rec.operator }}</td>{% else %}<td><span class="deliverybtn" id="{{ rec.id }}">派送</span></td>{% endif %}
+                                                    <td>{% if rec.send_time %}{{ rec.send_time }}{% else %}{% endif %}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <!--<div class="span12" id="dPager">
+                                        <div class="pager">
+                                            <ul>
+                                                <li><a class="first" href="javascript:LoadData(1)">首页</a></li>
+                                                <li><a class="prev" href="javascript:LoadData(3)">上一页</a></li>
+                                                <li>
+                                                    <a class="num" href="javascript:LoadData(1)">1</a>
+                                                    <a class="num" href="javascript:LoadData(2)">2</a>
+                                                    <a class="num" href="javascript:LoadData(3)">3</a>
+                                                    <span class="current">4</span>
+                                                </li>
+                                                <li><a class="next" href="javascript:LoadData(2)">下一页</a></li>
+                                                <li><a class="end" href="javascript:LoadData(4)">最后一页</a></li>
+                                                <li><span class="rows">共66条记录</span></li>
+                                            </ul>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+{% endblock body %}
